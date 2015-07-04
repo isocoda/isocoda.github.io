@@ -57,8 +57,10 @@
         var z = event.gamma;
 
               	// ローパスフィルタ
-      	pos_x = (x*accel_scale * filter_val) + (pos_x * (1.0 - filter_val));
-      	pos_y = (y*accel_scale * filter_val) + (pos_y * (1.0 - filter_val));
+      	//pos_x = (x*accel_scale * filter_val) + (pos_x * (1.0 - filter_val));
+        //pos_y = (y*accel_scale * filter_val) + (pos_y * (1.0 - filter_val));
+        pos_x=x;
+        pos_y=y;
         var d = document.getElementById("display");
         d.innerHTML =
         "<p> x = " + x + "<br />y = "
