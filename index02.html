@@ -17,12 +17,14 @@
       img.src = "Duke.jpg";
 
       function init() {
-      	pos_x = 0;
+        window.addEventListener("deviceorientation", handleOrientation(event), true);
+        window.addEventListener("deviceorientation", handleOrientation(event), true);
+        pos_x = 0;
       	pos_y = 0;
         cv = document.getElementById("main");
         ctx = cv.getContext("2d");
         display();
-        window.addEventListener("deviceorientation", handleOrientation(event), true);
+
 
       }
 
@@ -43,12 +45,20 @@
       function handleOrientation(orientData) {
       	var accel_scale = 500.0;
       	var filter_val = 0.1;
+        var x= orientData.alpha;
+        var y= orientData.beta;
+        var z= orientData.gamma;
 
-      	// ローパスフィルタ
-      	pos_x = (orientData.alpha*accel_scale * filter_val) + (pos_x * (1.0 - filter_val));
-      	pos_y = (orientData.beta*accel_scale * filter_val) + (pos_y * (1.0 - filter_val));
+        d.innerHTML = "<p> x = "
+        + x + "<br />y = "
+        + y + "<br />z = "
+        + z + "</p>";
+
+              	// ローパスフィルタ
+      	pos_x = (x*accel_scale * filter_val) + (pos_x * (1.0 - filter_val));
+      	pos_y = (yaccel_scale * filter_val) + (pos_y * (1.0 - filter_val));
         var d = document.getElementById("display");
-        d.innerHTML = "<p> x = " + orientData.x + "<br />y = " + orientData.y + "</p>";
+
       }
 
 
