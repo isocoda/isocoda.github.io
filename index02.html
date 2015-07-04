@@ -16,18 +16,21 @@
       var img = new Image();
       img.src = "images.jpg";
 
+
+
+
+      if (window.DeviceOrientationEvent) {
+        window.addEventListener("deviceorientation", handleOrientation, true);
+      } else {
+          alert("no deviceorientation");
+      }
+
       function init() {
 
-//        window.addEventListener("deviceorientation", handleOrientation(event), true);
+
         pos_x = 0;
       	pos_y = 0;
         cv = document.getElementById("main");
-
-        if (window.DeviceOrientationEvent) {
-          window.addEventListener("deviceorientation", handleOrientation(event), true);
-        } else {
-            alert("no deviceorientation");
-        }
         ctx = cv.getContext("2d");
         display();
       }
@@ -52,19 +55,17 @@
         var x = event.alpha;
         var y = event.beta;
         var z = event.gamma;
-        d.innerHTML =
-        "<p> x = " + x + "<br />y = "
-        + y + "<br />z = " + z + "</p>";
 
               	// ローパスフィルタ
       	pos_x = (x*accel_scale * filter_val) + (pos_x * (1.0 - filter_val));
       	pos_y = (y*accel_scale * filter_val) + (pos_y * (1.0 - filter_val));
         var d = document.getElementById("display");
+        d.innerHTML =
+        "<p> x = " + x + "<br />y = "
+        + y + "<br />z = " + z + "</p>";
 
       }
 
-
-    }
 
     </script>
   </head>
