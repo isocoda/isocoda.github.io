@@ -44,8 +44,8 @@
       	var filter_val = 0.1;
 
       	// ローパスフィルタ
-      	pos_x = (orientData.accelerationIncludingGravity.x*accel_scale * filter_val) + (pos_x * (1.0 - filter_val));
-      	pos_y = (orientData.accelerationIncludingGravity.y*accel_scale * filter_val) + (pos_y * (1.0 - filter_val));
+      	pos_x = (orientData.alpha*accel_scale * filter_val) + (pos_x * (1.0 - filter_val));
+      	pos_y = (orientData.beta*accel_scale * filter_val) + (pos_y * (1.0 - filter_val));
         var d = document.getElementById("display");
         d.innerHTML = "<p> x = " + orientData.x + "<br />y = " + orientData.y + "</p>";
       }
@@ -55,7 +55,7 @@
          alert("no accelerometer");
      }
      else {
-      window.addEventListener("devicemotion", handleOrientation, true);
+      window.addEventListener("deviceorientation", handleOrientation(event), true);
     }
 
     </script>
