@@ -56,7 +56,7 @@
 
               	// ローパスフィルタ
       	pos_x = (x*accel_scale * filter_val) + (pos_x * (1.0 - filter_val));
-      	pos_y = (yaccel_scale * filter_val) + (pos_y * (1.0 - filter_val));
+      	pos_y = (y*accel_scale * filter_val) + (pos_y * (1.0 - filter_val));
         var d = document.getElementById("display");
 
       }
