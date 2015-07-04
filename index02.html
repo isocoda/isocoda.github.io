@@ -14,17 +14,16 @@
       var cv, ctx;
       var pos_x, pos_y;
       var img = new Image();
-      img.src = "pyspa.jpg";
-
-      window.addEventListener("deviceorientation", handleOrientation(event), true);
+      img.src = "Duke.jpg";
 
       function init() {
       	pos_x = 0;
       	pos_y = 0;
         cv = document.getElementById("main");
         ctx = cv.getContext("2d");
-
         display();
+        window.addEventListener("deviceorientation", handleOrientation(event), true);
+
       }
 
       function display() {
