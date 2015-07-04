@@ -14,18 +14,22 @@
       var cv, ctx;
       var pos_x, pos_y;
       var img = new Image();
-      img.src = "Duke.jpg";
+      img.src = "images.jpg";
 
       function init() {
-        window.addEventListener("deviceorientation", handleOrientation(event), true);
-        window.addEventListener("deviceorientation", handleOrientation(event), true);
+
+//        window.addEventListener("deviceorientation", handleOrientation(event), true);
         pos_x = 0;
       	pos_y = 0;
         cv = document.getElementById("main");
+
+        if (window.DeviceOrientationEvent) {
+          window.addEventListener("deviceorientation", handleOrientation(event), true);
+        } else {
+            alert("no deviceorientation");
+        }
         ctx = cv.getContext("2d");
         display();
-
-
       }
 
       function display() {
@@ -42,17 +46,15 @@
         setTimeout(display, 50); // タイマーで定期的に display() を実行
       }
 
-      function handleOrientation(orientData) {
+      function handleOrientation(event) {
       	var accel_scale = 500.0;
       	var filter_val = 0.1;
-        var x= orientData.alpha;
-        var y= orientData.beta;
-        var z= orientData.gamma;
-
-        d.innerHTML = "<p> x = "
-        + x + "<br />y = "
-        + y + "<br />z = "
-        + z + "</p>";
+        var x = event.alpha;
+        var y = event.beta;
+        var z = event.gamma;
+        d.innerHTML =
+        "<p> x = " + x + "<br />y = "
+        + y + "<br />z = " + z + "</p>";
 
               	// ローパスフィルタ
       	pos_x = (x*accel_scale * filter_val) + (pos_x * (1.0 - filter_val));
@@ -67,7 +69,7 @@
     </script>
   </head>
   <body onload="init();">
-    <div id="display"><p>x = 0<br />y = 0</p></div>
-    <canvas id="main" width="300" height="300"></canvas>
+    <div id="display"><p>x = 0<br />y = 0<br />z = 0</p></div>
+    <canvas id="main" width="600" height="600"></canvas>
   </body>
 </html>
